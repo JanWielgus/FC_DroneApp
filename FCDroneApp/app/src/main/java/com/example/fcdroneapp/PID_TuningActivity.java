@@ -411,6 +411,9 @@ public class PID_TuningActivity extends AppCompatActivity {
                 dPidSeekBar.setProgress(map(fromValue, 0f, dMaxValue, 0, sliderMax));
                 break;
         }
+
+
+
     }
 
 
