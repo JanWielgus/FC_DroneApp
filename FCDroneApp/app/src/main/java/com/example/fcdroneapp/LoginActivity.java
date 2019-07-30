@@ -28,16 +28,17 @@ public class LoginActivity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (passwordText.getText().toString().compareTo(password) == 0)
+                //if (passwordText.getText().toString().compareTo(password) == 0)
                 {
                     // successful login - return to the main activity
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                     finish(); // return to the main activity
                 }
+                /*
                 else
                 {
                     Toast.makeText(LoginActivity.this, "Wrong password", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
     }
