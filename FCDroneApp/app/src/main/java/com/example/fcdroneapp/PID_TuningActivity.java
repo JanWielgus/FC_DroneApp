@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -51,6 +52,7 @@ public class PID_TuningActivity extends AppCompatActivity {
     Button pMinusButton, iMinusButton, iMaxMinusButton, dMinusButton;
     Button pPlusButton, iPlusButton, iMaxPlusButton, dPlusButton;
     EditText decimalStepEditText, integerStepEditText;
+    Switch autoSendingSwitch;
 
     ProgressBar connectingProgressBar;
 
@@ -74,7 +76,6 @@ public class PID_TuningActivity extends AppCompatActivity {
         // receive the address of the bluetooth device
         Intent newIntent = getIntent();
         address = newIntent.getStringExtra("EXTRA_ADDRESS");
-        Log.d(TAG, " aaaaaaaaaaaa-----        sdfasdfasdfasdffffffffffffffffffffffffff   " + address);
 
         // View the layout
         setContentView(R.layout.activity_pid__tuning);
@@ -103,6 +104,9 @@ public class PID_TuningActivity extends AppCompatActivity {
             Log.e(TAG, "Could not close the client socket", e);
         }
     }
+
+
+
 
     private void initComponents()
     {
@@ -144,6 +148,8 @@ public class PID_TuningActivity extends AppCompatActivity {
         // decimal and integer edit texts
         decimalStepEditText = findViewById(R.id.decimalStepEditText);
         integerStepEditText = findViewById(R.id.integerStepEditText);
+
+        autoSendingSwitch = findViewById(R.id.autoSendingSwitch);
 
 
         connectingProgressBar = (ProgressBar) findViewById(R.id.connectingProgressBar);
@@ -192,6 +198,7 @@ public class PID_TuningActivity extends AppCompatActivity {
                 float value = map(i, 0, sliderMax, 0f, pMaxValue);
                 value = setFloatPrecision(value, 2);
                 pValueEditText.setText(Float.toString(value));
+                pilcom.updateP(value);
             }
 
             @Override
@@ -211,6 +218,7 @@ public class PID_TuningActivity extends AppCompatActivity {
                 float value = map(i, 0, sliderMax, 0f, iMaxValue);
                 value = setFloatPrecision(value, 2);
                 iValueEditText.setText(Float.toString(value));
+                pilcom.updateI(value);
             }
 
             @Override
@@ -229,6 +237,7 @@ public class PID_TuningActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 int value = map(i, 0, sliderMax, 0, iMaxMaxValue);
                 iMaxValueEditText.setText(Integer.toString(value));
+                pilcom.updateImax(value);
             }
 
             @Override
@@ -248,6 +257,7 @@ public class PID_TuningActivity extends AppCompatActivity {
                 float value = map(i, 0, sliderMax, 0f, dMaxValue);
                 value = setFloatPrecision(value, 2);
                 dValueEditText.setText(Float.toString(value));
+                pilcom.updateD(value);
             }
 
             @Override
@@ -366,7 +376,53 @@ public class PID_TuningActivity extends AppCompatActivity {
 
 
 
+        autoSendingSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b)
+                    pilcom.enableAutoSending();
+                else
+                    pilcom.disableAutoSaving();
+            }
+        });
+
+
+
+
+
     }
+
+
+
+
+
+
+    // spinner on item selected method
+    private AdapterView.OnItemSelectedListener onControllerToTuneSpinnerItemSelected = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
+        {
+            //Toast.makeText(PID_TuningActivity.this, Integer.toString(i), Toast.LENGTH_SHORT).show();
+
+
+            pilcom.updateControllerID(i);
+                /*
+                    0 - leveling
+                    1 - yaw
+                    ...
+                 */
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    };
+
+
+
+
 
 
     public void plusMinusButtonsOnClicks(View view)
@@ -416,31 +472,6 @@ public class PID_TuningActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
-    // spinner on item selected method
-    private AdapterView.OnItemSelectedListener onControllerToTuneSpinnerItemSelected = new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
-        {
-            //Toast.makeText(PID_TuningActivity.this, Integer.toString(i), Toast.LENGTH_SHORT).show();
-
-
-            ////////////////////////////////////////////////////////
-
-            // EDIT ON ITEM SELECTED METHOD HERE !!!!!!!!!!
-
-            // /////////////////////////////////////////////////////
-
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> adapterView) {
-
-        }
-    };
 
 
 

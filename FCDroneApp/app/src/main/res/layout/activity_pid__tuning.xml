@@ -334,10 +334,11 @@
                             android:layout_marginRight="20dp"/>
 
                         <Switch
-                            android:id="@+id/switch1"
+                            android:id="@+id/autoSendingSwitch"
                             android:layout_width="135dp"
                             android:layout_height="wrap_content"
-                            android:text="Auto sending" />
+                            android:text="Auto sending"
+                            android:checked="false"/>
 
                     </LinearLayout>
 

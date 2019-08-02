@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothSocket;
 import android.util.Log;
 
 import android.os.Handler;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -80,7 +81,7 @@ public class PilotCommunication
         public void run()
         {
             // send
-            byte[] dataToSend = new byte[15];
+            byte[] dataToSend = new byte[21];
             byte[] temp = new byte[4];
 
 
@@ -115,11 +116,12 @@ public class PilotCommunication
 
 
 
-            // send data if bluetooth socket exists
+            // send data if bluetooth socket exists AND IF NEED TO SEND DATA
             // remember to check result of isBtSocketExist() method
-            if (isBtSocketExist()) {
+            if (needToSendValues && isBtSocketExist()) {
                 try {
                     outputStream.write(dataToSend);
+                    needToSendValues = false;
                 } catch (IOException e) {
                     Log.e(TAG, "Error occurred when sending data", e);
                 }
@@ -154,12 +156,12 @@ public class PilotCommunication
 
 
     // getters and setters (data update methods)
-    void udpateControllerID(int controllerID) {
+    void updateControllerID(int controllerID) {
         this.controllerID = controllerID;
         needToSendValues = true;
     }
 
-    void udpateP(float value) {
+    void updateP(float value) {
         pidP = (int)(value * 100);
         needToSendValues = true;
     }
