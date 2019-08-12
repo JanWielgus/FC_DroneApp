@@ -24,10 +24,18 @@ public class PilotCommunication
     private OutputStream outputStream = null;
 
     // communication values
-    int controllerID; // which PID controller is tuned
-    int pidP, pidI, pidD; // pid values multiplied by 100
-    int pidImax;
+
+    // controller 1
+    int controller1ID; // which PID controller is tuned as controller 1
+    int pidP1, pidI1, pidD1; // pid values multiplied by 100
+    int pidImax1;
+    // controller 2
+    int controller2ID; // which PID controller is tuned as controller 2
+    int pidP2, pidI2, pidD2; // pid values multiplied by 100
+    int pidImax2;
     boolean needToSendValues = false;
+
+    int currentController = 1; // current controller (controller 1 or 2) is something different to controller ID   !!!!!!!!!!!!!!!!!!!!!!
 
 
 /*
@@ -89,30 +97,62 @@ public class PilotCommunication
             dataToSend[0] = (byte)123;
 
 
-            // controller ID
-            temp = intToByteArray(controllerID);
-            for (int i=0; i<4; i++)
-                dataToSend[i+1] = temp[i];
 
-            // pid P
-            temp = intToByteArray(pidP);
-            for (int i=0; i<4; i++)
-                dataToSend[i+5] = temp[i];
 
-            // pid I
-            temp = intToByteArray(pidI);
-            for (int i=0; i<4; i++)
-                dataToSend[i+9] = temp[i];
+            if (currentController == 1)
+            {
+                // controller ID
+                temp = intToByteArray(controller1ID);
+                for (int i=0; i<4; i++)
+                    dataToSend[i+1] = temp[i];
 
-            // pid I max
-            temp = intToByteArray(pidImax);
-            for (int i=0; i<4; i++)
-                dataToSend[i+13] = temp[i];
+                // pid P
+                temp = intToByteArray(pidP1);
+                for (int i=0; i<4; i++)
+                    dataToSend[i+5] = temp[i];
 
-            // pid D
-            temp = intToByteArray(pidD);
-            for (int i=0; i<4; i++)
-                dataToSend[i+17] = temp[i];
+                // pid I
+                temp = intToByteArray(pidI1);
+                for (int i=0; i<4; i++)
+                    dataToSend[i+9] = temp[i];
+
+                // pid I max
+                temp = intToByteArray(pidImax1);
+                for (int i=0; i<4; i++)
+                    dataToSend[i+13] = temp[i];
+
+                // pid D
+                temp = intToByteArray(pidD1);
+                for (int i=0; i<4; i++)
+                    dataToSend[i+17] = temp[i];
+            }
+            else if (currentController == 2)
+            {
+                // controller ID
+                temp = intToByteArray(controller2ID);
+                for (int i=0; i<4; i++)
+                    dataToSend[i+1] = temp[i];
+
+                // pid P
+                temp = intToByteArray(pidP2);
+                for (int i=0; i<4; i++)
+                    dataToSend[i+5] = temp[i];
+
+                // pid I
+                temp = intToByteArray(pidI2);
+                for (int i=0; i<4; i++)
+                    dataToSend[i+9] = temp[i];
+
+                // pid I max
+                temp = intToByteArray(pidImax2);
+                for (int i=0; i<4; i++)
+                    dataToSend[i+13] = temp[i];
+
+                // pid D
+                temp = intToByteArray(pidD2);
+                for (int i=0; i<4; i++)
+                    dataToSend[i+17] = temp[i];
+            }
 
 
 
@@ -156,29 +196,66 @@ public class PilotCommunication
 
 
     // getters and setters (data update methods)
-    void updateControllerID(int controllerID) {
-        this.controllerID = controllerID;
-        needToSendValues = true;
+
+    // controller 1
+
+    void changeController1ID(int controllerID) {
+        this.controller1ID = controllerID;
     }
 
-    void updateP(float value) {
-        pidP = (int)(value * 100);
+    void updateP1(float value) {
+        pidP1 = (int)(value * 100);
         needToSendValues = true;
+        currentController = 1;
     }
 
-    void updateI(float value) {
-        pidI = (int)(value * 100);
+    void updateI1(float value) {
+        pidI1 = (int)(value * 100);
         needToSendValues = true;
+        currentController = 1;
     }
 
-    void updateImax(int value) {
-        pidImax = value;
+    void updateImax1(int value) {
+        pidImax1 = value;
         needToSendValues = true;
+        currentController = 1;
     }
 
-    void updateD(float value) {
-        pidD = (int)(value * 100);
+    void updateD1(float value) {
+        pidD1 = (int)(value * 100);
         needToSendValues = true;
+        currentController = 1;
+    }
+
+
+    // controller 2
+
+    void changeController2ID(int controllerID) {
+        this.controller2ID = controllerID;
+    }
+
+    void updateP2(float value) {
+        pidP2 = (int)(value * 100);
+        needToSendValues = true;
+        currentController = 2;
+    }
+
+    void updateI2(float value) {
+        pidI2 = (int)(value * 100);
+        needToSendValues = true;
+        currentController = 2;
+    }
+
+    void updateImax2(int value) {
+        pidImax2 = value;
+        needToSendValues = true;
+        currentController = 2;
+    }
+
+    void updateD2(float value) {
+        pidD2 = (int)(value * 100);
+        needToSendValues = true;
+        currentController = 2;
     }
 
 

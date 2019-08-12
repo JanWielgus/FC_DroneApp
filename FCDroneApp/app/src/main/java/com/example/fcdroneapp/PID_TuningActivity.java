@@ -45,16 +45,29 @@ public class PID_TuningActivity extends AppCompatActivity {
 
 
 
-    Spinner controllerToTuneSpinner;
-    EditText pValueEditText, iValueEditText, iMaxValueEditText, dValueEditText;
-    SeekBar pPidSeekBar, iPidSeekBar, iMaxPidSeekBar, dPidSeekBar;
-    CheckBox pSetZeroCheckBox, iSetZeroCheckBox, iMaxSetZeroCheckBox, dSetZeroCheckBox;
-    Button pMinusButton, iMinusButton, iMaxMinusButton, dMinusButton;
-    Button pPlusButton, iPlusButton, iMaxPlusButton, dPlusButton;
+    // First PID window
+    Spinner controllerToTuneSpinner1;
+    EditText pValueEditText1, iValueEditText1, iMaxValueEditText1, dValueEditText1;
+    SeekBar pPidSeekBar1, iPidSeekBar1, iMaxPidSeekBar1, dPidSeekBar1;
+    CheckBox pSetZeroCheckBox1, iSetZeroCheckBox1, iMaxSetZeroCheckBox1, dSetZeroCheckBox1;
+    Button pMinusButton1, iMinusButton1, iMaxMinusButton1, dMinusButton1;
+    Button pPlusButton1, iPlusButton1, iMaxPlusButton1, dPlusButton1;
+
+
+    // Second PID window
+
+    Spinner controllerToTuneSpinner2;
+    EditText pValueEditText2, iValueEditText2, iMaxValueEditText2, dValueEditText2;
+    SeekBar pPidSeekBar2, iPidSeekBar2, iMaxPidSeekBar2, dPidSeekBar2;
+    CheckBox pSetZeroCheckBox2, iSetZeroCheckBox2, iMaxSetZeroCheckBox2, dSetZeroCheckBox2;
+    Button pMinusButton2, iMinusButton2, iMaxMinusButton2, dMinusButton2;
+    Button pPlusButton2, iPlusButton2, iMaxPlusButton2, dPlusButton2;
+
+
     EditText decimalStepEditText, integerStepEditText;
     Switch autoSendingSwitch;
-
     ProgressBar connectingProgressBar;
+
 
     // bluetooth variables
     String address = null;
@@ -110,39 +123,82 @@ public class PID_TuningActivity extends AppCompatActivity {
 
     private void initComponents()
     {
-        controllerToTuneSpinner = (Spinner) findViewById(R.id.controllerToTuneSpinner);
+        // FIRST PID WINDOW
+            controllerToTuneSpinner1 = (Spinner) findViewById(R.id.controllerToTuneSpinner1);
+
+            // value showing boxes
+            pValueEditText1 = (EditText) findViewById(R.id.pValueEditText1);
+            iValueEditText1 = (EditText) findViewById(R.id.iValueEditText1);
+            iMaxValueEditText1 = (EditText) findViewById(R.id.iMaxValueEditText1);
+            dValueEditText1 = (EditText) findViewById(R.id.dValueEditText1);
 
 
-        // value showing boxes
-        pValueEditText = (EditText) findViewById(R.id.pValueEditText);
-        iValueEditText = (EditText) findViewById(R.id.iValueEditText);
-        iMaxValueEditText = (EditText) findViewById(R.id.iMaxValueEditText);
-        dValueEditText = (EditText) findViewById(R.id.dValueEditText);
+            // seek bars
+            pPidSeekBar1 = (SeekBar) findViewById(R.id.p_pidSeekBar1);
+            iPidSeekBar1 = (SeekBar) findViewById(R.id.i_pidSeekBar1);
+            iMaxPidSeekBar1 = (SeekBar) findViewById(R.id.iMax_pidSeekBar1);
+            dPidSeekBar1 = (SeekBar) findViewById(R.id.d_pidSeekBar1);
 
 
-        // seek bars
-        pPidSeekBar = (SeekBar) findViewById(R.id.p_pidSeekBar);
-        iPidSeekBar = (SeekBar) findViewById(R.id.i_pidSeekBar);
-        iMaxPidSeekBar = (SeekBar) findViewById(R.id.iMax_pidSeekBar);
-        dPidSeekBar = (SeekBar) findViewById(R.id.d_pidSeekBar);
+            // zero value check boxes
+            pSetZeroCheckBox1 = findViewById(R.id.pSetZeroCheckBox1);
+            iSetZeroCheckBox1 = findViewById(R.id.iSetZeroCheckBox1);
+            iMaxSetZeroCheckBox1 = findViewById(R.id.iMaxSetZeroCheckBox1);
+            dSetZeroCheckBox1 = findViewById(R.id.dSetZeroCheckBox1);
 
 
-        // zero value check boxes
-        pSetZeroCheckBox = findViewById(R.id.pSetZeroCheckBox);
-        iSetZeroCheckBox = findViewById(R.id.iSetZeroCheckBox);
-        iMaxSetZeroCheckBox = findViewById(R.id.iMaxSetZeroCheckBox);
-        dSetZeroCheckBox = findViewById(R.id.dSetZeroCheckBox);
+            // plus and minus buttons
+            pMinusButton1 = findViewById(R.id.pMinusButton1);
+            iMinusButton1 = findViewById(R.id.iMinusButton1);
+            iMaxMinusButton1 = findViewById(R.id.iMaxMinusButton1);
+            dMinusButton1 = findViewById(R.id.dMinusButton1);
+            pPlusButton1 = findViewById(R.id.pPlusButton1);
+            iPlusButton1 = findViewById(R.id.iPlusButton1);
+            iMaxPlusButton1 = findViewById(R.id.iMaxPlusButton1);
+            dPlusButton1 = findViewById(R.id.dPlusButton1);
 
 
-        // plus and minus buttons
-        pMinusButton = findViewById(R.id.pMinusButton);
-        iMinusButton = findViewById(R.id.iMinusButton);
-        iMaxMinusButton = findViewById(R.id.iMaxMinusButton);
-        dMinusButton = findViewById(R.id.dMinusButton);
-        pPlusButton = findViewById(R.id.pPlusButton);
-        iPlusButton = findViewById(R.id.iPlusButton);
-        iMaxPlusButton = findViewById(R.id.iMaxPlusButton);
-        dPlusButton = findViewById(R.id.dPlusButton);
+
+
+
+
+        // SECOND PID WINDOW
+
+            controllerToTuneSpinner2 = (Spinner) findViewById(R.id.controllerToTuneSpinner2);
+
+            // value showing boxes
+            pValueEditText2 = (EditText) findViewById(R.id.pValueEditText2);
+            iValueEditText2 = (EditText) findViewById(R.id.iValueEditText2);
+            iMaxValueEditText2 = (EditText) findViewById(R.id.iMaxValueEditText2);
+            dValueEditText2 = (EditText) findViewById(R.id.dValueEditText2);
+
+
+            // seek bars
+            pPidSeekBar2 = (SeekBar) findViewById(R.id.p_pidSeekBar2);
+            iPidSeekBar2 = (SeekBar) findViewById(R.id.i_pidSeekBar2);
+            iMaxPidSeekBar2 = (SeekBar) findViewById(R.id.iMax_pidSeekBar2);
+            dPidSeekBar2 = (SeekBar) findViewById(R.id.d_pidSeekBar2);
+
+
+            // zero value check boxes
+            pSetZeroCheckBox2 = findViewById(R.id.pSetZeroCheckBox2);
+            iSetZeroCheckBox2 = findViewById(R.id.iSetZeroCheckBox2);
+            iMaxSetZeroCheckBox2 = findViewById(R.id.iMaxSetZeroCheckBox2);
+            dSetZeroCheckBox2 = findViewById(R.id.dSetZeroCheckBox2);
+
+
+            // plus and minus buttons
+            pMinusButton2 = findViewById(R.id.pMinusButton2);
+            iMinusButton2 = findViewById(R.id.iMinusButton2);
+            iMaxMinusButton2 = findViewById(R.id.iMaxMinusButton2);
+            dMinusButton2 = findViewById(R.id.dMinusButton2);
+            pPlusButton2 = findViewById(R.id.pPlusButton2);
+            iPlusButton2 = findViewById(R.id.iPlusButton2);
+            iMaxPlusButton2 = findViewById(R.id.iMaxPlusButton2);
+            dPlusButton2 = findViewById(R.id.dPlusButton2);
+
+
+
 
 
         // decimal and integer edit texts
@@ -157,14 +213,23 @@ public class PID_TuningActivity extends AppCompatActivity {
         // fill spinner with values
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(PID_TuningActivity.this, R.array.pid_controllers_list, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        controllerToTuneSpinner.setAdapter(adapter);
+        controllerToTuneSpinner1.setAdapter(adapter);
+        controllerToTuneSpinner2.setAdapter(adapter);
 
 
         // Set showed values to the default
-        pValueEditText.setText((Float.toString(0.0f)));
-        iValueEditText.setText((Float.toString(0.0f)));
-        iMaxValueEditText.setText(Integer.toString(0));
-        dValueEditText.setText((Float.toString(0.0f)));
+        // 1
+        pValueEditText1.setText((Float.toString(0.0f)));
+        iValueEditText1.setText((Float.toString(0.0f)));
+        iMaxValueEditText1.setText(Integer.toString(0));
+        dValueEditText1.setText((Float.toString(0.0f)));
+        // 2
+        pValueEditText2.setText((Float.toString(0.0f)));
+        iValueEditText2.setText((Float.toString(0.0f)));
+        iMaxValueEditText2.setText(Integer.toString(0));
+        dValueEditText2.setText((Float.toString(0.0f)));
+
+
         decimalStepEditText.setText(Float.toString(decimalStepValue));
         integerStepEditText.setText(Integer.toString(integerStepValue));
     }
@@ -186,19 +251,21 @@ public class PID_TuningActivity extends AppCompatActivity {
 
     private void setUpListeners()
     {
+        ///////
+        // CONTROLLER 1
+        ///////
+
         // set spinner listener
-        controllerToTuneSpinner.setOnItemSelectedListener(onControllerToTuneSpinnerItemSelected); // This listener is made in a different way
-
-
+        controllerToTuneSpinner1.setOnItemSelectedListener(onControllerToTuneSpinner1ItemSelected); // This listener is made in a different way
 
         // P seek bar listener
-        pPidSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        pPidSeekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 float value = map(i, 0, sliderMax, 0f, pMaxValue);
                 value = setFloatPrecision(value, 2);
-                pValueEditText.setText(Float.toString(value));
-                pilcom.updateP(value);
+                pValueEditText1.setText(Float.toString(value));
+                pilcom.updateP1(value);
             }
 
             @Override
@@ -212,13 +279,13 @@ public class PID_TuningActivity extends AppCompatActivity {
 
 
         // I seek bar listener
-        iPidSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        iPidSeekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 float value = map(i, 0, sliderMax, 0f, iMaxValue);
                 value = setFloatPrecision(value, 2);
-                iValueEditText.setText(Float.toString(value));
-                pilcom.updateI(value);
+                iValueEditText1.setText(Float.toString(value));
+                pilcom.updateI1(value);
             }
 
             @Override
@@ -232,12 +299,12 @@ public class PID_TuningActivity extends AppCompatActivity {
 
 
         // I_Max seek bar listener
-        iMaxPidSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        iMaxPidSeekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 int value = map(i, 0, sliderMax, 0, iMaxMaxValue);
-                iMaxValueEditText.setText(Integer.toString(value));
-                pilcom.updateImax(value);
+                iMaxValueEditText1.setText(Integer.toString(value));
+                pilcom.updateImax1(value);
             }
 
             @Override
@@ -251,13 +318,13 @@ public class PID_TuningActivity extends AppCompatActivity {
 
 
         // D seek bar listener
-        dPidSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        dPidSeekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 float value = map(i, 0, sliderMax, 0f, dMaxValue);
                 value = setFloatPrecision(value, 2);
-                dValueEditText.setText(Float.toString(value));
-                pilcom.updateD(value);
+                dValueEditText1.setText(Float.toString(value));
+                pilcom.updateD1(value);
             }
 
             @Override
@@ -271,7 +338,7 @@ public class PID_TuningActivity extends AppCompatActivity {
 
 
         // P value editText
-        pValueEditText.addTextChangedListener(new TextWatcher() {
+        pValueEditText1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
@@ -288,7 +355,7 @@ public class PID_TuningActivity extends AppCompatActivity {
 
 
         // I value editText
-        iValueEditText.addTextChangedListener(new TextWatcher() {
+        iValueEditText1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
@@ -304,7 +371,7 @@ public class PID_TuningActivity extends AppCompatActivity {
 
 
         // I_Max value exitText
-        iMaxValueEditText.addTextChangedListener(new TextWatcher() {
+        iMaxValueEditText1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
@@ -320,7 +387,7 @@ public class PID_TuningActivity extends AppCompatActivity {
 
 
         // D value exitText
-        dValueEditText.addTextChangedListener(new TextWatcher() {
+        dValueEditText1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
@@ -334,6 +401,182 @@ public class PID_TuningActivity extends AppCompatActivity {
 
 
 
+
+        /////////
+        // CONTROLLER 2
+        /////////
+
+
+        // set spinner listener
+        //controllerToTuneSpinner2.setOnItemSelectedListener(onControllerToTuneSpinner1ItemSelected); // This listener is made in a different way
+        controllerToTuneSpinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                pilcom.changeController2ID(i);
+                /*
+                    0 - leveling
+                    1 - yaw
+                    ...
+                 */
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        // P seek bar listener
+        pPidSeekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                float value = map(i, 0, sliderMax, 0f, pMaxValue);
+                value = setFloatPrecision(value, 2);
+                pValueEditText2.setText(Float.toString(value));
+                pilcom.updateP2(value);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+
+
+
+        // I seek bar listener
+        iPidSeekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                float value = map(i, 0, sliderMax, 0f, iMaxValue);
+                value = setFloatPrecision(value, 2);
+                iValueEditText2.setText(Float.toString(value));
+                pilcom.updateI2(value);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+
+
+
+        // I_Max seek bar listener
+        iMaxPidSeekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                int value = map(i, 0, sliderMax, 0, iMaxMaxValue);
+                iMaxValueEditText2.setText(Integer.toString(value));
+                pilcom.updateImax2(value);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+
+
+
+        // D seek bar listener
+        dPidSeekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                float value = map(i, 0, sliderMax, 0f, dMaxValue);
+                value = setFloatPrecision(value, 2);
+                dValueEditText2.setText(Float.toString(value));
+                pilcom.updateD2(value);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+
+
+
+        // P value editText
+        pValueEditText2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+
+
+
+
+        // I value editText
+        iValueEditText2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+
+
+
+
+        // I_Max value exitText
+        iMaxValueEditText2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+
+
+
+
+        // D value exitText
+        dValueEditText2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+
+
+
+
+
+
+
+        //////////////////////////////////////////
+        /// OTHER ///
+        //////////////////////////////////////////
 
         // decimal step editText
         decimalStepEditText.addTextChangedListener(new TextWatcher() {
@@ -398,14 +641,14 @@ public class PID_TuningActivity extends AppCompatActivity {
 
 
     // spinner on item selected method
-    private AdapterView.OnItemSelectedListener onControllerToTuneSpinnerItemSelected = new AdapterView.OnItemSelectedListener() {
+    private AdapterView.OnItemSelectedListener onControllerToTuneSpinner1ItemSelected = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
         {
             //Toast.makeText(PID_TuningActivity.this, Integer.toString(i), Toast.LENGTH_SHORT).show();
 
 
-            pilcom.updateControllerID(i);
+            pilcom.changeController1ID(i);
                 /*
                     0 - leveling
                     1 - yaw
@@ -425,46 +668,97 @@ public class PID_TuningActivity extends AppCompatActivity {
 
 
 
-    public void plusMinusButtonsOnClicks(View view)
+    public void plusMinusButtons1OnClicks(View view)
     {
         float fromValue;
 
         switch (view.getId())
         {
-            case R.id.pMinusButton:
-                fromValue = Float.parseFloat(pValueEditText.getText().toString()) - decimalStepValue;
-                pPidSeekBar.setProgress(map(fromValue, 0f, pMaxValue, 0, sliderMax));
+            case R.id.pMinusButton1:
+                fromValue = Float.parseFloat(pValueEditText1.getText().toString()) - decimalStepValue;
+                pPidSeekBar1.setProgress(map(fromValue, 0f, pMaxValue, 0, sliderMax));
                 break;
-            case R.id.pPlusButton:
-                fromValue = Float.parseFloat(pValueEditText.getText().toString()) + decimalStepValue;
-                pPidSeekBar.setProgress(map(fromValue, 0f, pMaxValue, 0, sliderMax));
-                break;
-
-            case R.id.iMinusButton:
-                fromValue = Float.parseFloat(iValueEditText.getText().toString()) - decimalStepValue;
-                iPidSeekBar.setProgress(map(fromValue, 0f, iMaxValue, 0, sliderMax));
-                break;
-            case R.id.iPlusButton:
-                fromValue = Float.parseFloat(iValueEditText.getText().toString()) + decimalStepValue;
-                iPidSeekBar.setProgress(map(fromValue, 0f, iMaxValue, 0, sliderMax));
+            case R.id.pPlusButton1:
+                fromValue = Float.parseFloat(pValueEditText1.getText().toString()) + decimalStepValue;
+                pPidSeekBar1.setProgress(map(fromValue, 0f, pMaxValue, 0, sliderMax));
                 break;
 
-            case R.id.iMaxMinusButton:
-                fromValue = Float.parseFloat(iMaxValueEditText.getText().toString()) - integerStepValue;
-                iMaxPidSeekBar.setProgress(map(fromValue, 0f, (float)iMaxMaxValue, 0, sliderMax));
+            case R.id.iMinusButton1:
+                fromValue = Float.parseFloat(iValueEditText1.getText().toString()) - decimalStepValue;
+                iPidSeekBar1.setProgress(map(fromValue, 0f, iMaxValue, 0, sliderMax));
                 break;
-            case R.id.iMaxPlusButton:
-                fromValue = Float.parseFloat(iMaxValueEditText.getText().toString()) + integerStepValue;
-                iMaxPidSeekBar.setProgress(map(fromValue, 0f, (float)iMaxMaxValue, 0, sliderMax));
+            case R.id.iPlusButton1:
+                fromValue = Float.parseFloat(iValueEditText1.getText().toString()) + decimalStepValue;
+                iPidSeekBar1.setProgress(map(fromValue, 0f, iMaxValue, 0, sliderMax));
                 break;
 
-            case R.id.dMinusButton:
-                fromValue = Float.parseFloat(dValueEditText.getText().toString()) - decimalStepValue;
-                dPidSeekBar.setProgress(map(fromValue, 0f, dMaxValue, 0, sliderMax));
+            case R.id.iMaxMinusButton1:
+                fromValue = Float.parseFloat(iMaxValueEditText1.getText().toString()) - integerStepValue;
+                iMaxPidSeekBar1.setProgress(map(fromValue, 0f, (float)iMaxMaxValue, 0, sliderMax));
                 break;
-            case R.id.dPlusButton:
-                fromValue = Float.parseFloat(dValueEditText.getText().toString()) + decimalStepValue;
-                dPidSeekBar.setProgress(map(fromValue, 0f, dMaxValue, 0, sliderMax));
+            case R.id.iMaxPlusButton1:
+                fromValue = Float.parseFloat(iMaxValueEditText1.getText().toString()) + integerStepValue;
+                iMaxPidSeekBar1.setProgress(map(fromValue, 0f, (float)iMaxMaxValue, 0, sliderMax));
+                break;
+
+            case R.id.dMinusButton1:
+                fromValue = Float.parseFloat(dValueEditText1.getText().toString()) - decimalStepValue;
+                dPidSeekBar1.setProgress(map(fromValue, 0f, dMaxValue, 0, sliderMax));
+                break;
+            case R.id.dPlusButton1:
+                fromValue = Float.parseFloat(dValueEditText1.getText().toString()) + decimalStepValue;
+                dPidSeekBar1.setProgress(map(fromValue, 0f, dMaxValue, 0, sliderMax));
+                break;
+        }
+
+
+
+    }
+
+
+
+
+
+    public void plusMinusButtons2OnClicks(View view)
+    {
+        float fromValue;
+
+        switch (view.getId())
+        {
+            case R.id.pMinusButton2:
+                fromValue = Float.parseFloat(pValueEditText2.getText().toString()) - decimalStepValue;
+                pPidSeekBar2.setProgress(map(fromValue, 0f, pMaxValue, 0, sliderMax));
+                break;
+            case R.id.pPlusButton2:
+                fromValue = Float.parseFloat(pValueEditText2.getText().toString()) + decimalStepValue;
+                pPidSeekBar2.setProgress(map(fromValue, 0f, pMaxValue, 0, sliderMax));
+                break;
+
+            case R.id.iMinusButton2:
+                fromValue = Float.parseFloat(iValueEditText2.getText().toString()) - decimalStepValue;
+                iPidSeekBar2.setProgress(map(fromValue, 0f, iMaxValue, 0, sliderMax));
+                break;
+            case R.id.iPlusButton2:
+                fromValue = Float.parseFloat(iValueEditText2.getText().toString()) + decimalStepValue;
+                iPidSeekBar2.setProgress(map(fromValue, 0f, iMaxValue, 0, sliderMax));
+                break;
+
+            case R.id.iMaxMinusButton2:
+                fromValue = Float.parseFloat(iMaxValueEditText2.getText().toString()) - integerStepValue;
+                iMaxPidSeekBar2.setProgress(map(fromValue, 0f, (float)iMaxMaxValue, 0, sliderMax));
+                break;
+            case R.id.iMaxPlusButton2:
+                fromValue = Float.parseFloat(iMaxValueEditText2.getText().toString()) + integerStepValue;
+                iMaxPidSeekBar2.setProgress(map(fromValue, 0f, (float)iMaxMaxValue, 0, sliderMax));
+                break;
+
+            case R.id.dMinusButton2:
+                fromValue = Float.parseFloat(dValueEditText2.getText().toString()) - decimalStepValue;
+                dPidSeekBar2.setProgress(map(fromValue, 0f, dMaxValue, 0, sliderMax));
+                break;
+            case R.id.dPlusButton2:
+                fromValue = Float.parseFloat(dValueEditText2.getText().toString()) + decimalStepValue;
+                dPidSeekBar2.setProgress(map(fromValue, 0f, dMaxValue, 0, sliderMax));
                 break;
         }
 
