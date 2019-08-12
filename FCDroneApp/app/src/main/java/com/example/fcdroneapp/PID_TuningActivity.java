@@ -36,10 +36,10 @@ public class PID_TuningActivity extends AppCompatActivity {
     private static final int sliderMax = 400;
     private static float decimalStepValue = 0.2f;
     private static int integerStepValue = 20;
-    private static float pMaxValue = 3.5f;
-    private static float iMaxValue = 3.5f;
+    private static float pMaxValue = 8f;
+    private static float iMaxValue = 20.0f;
     private static int iMaxMaxValue = 200;
-    private static float dMaxValue = 3.5f;
+    private static float dMaxValue = 0.25f;
 
 
 
