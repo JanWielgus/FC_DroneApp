@@ -37,7 +37,7 @@ public class PID_TuningActivity extends AppCompatActivity {
     private static float decimalStepValue = 0.2f;
     private static int integerStepValue = 20;
     private static float pMaxValue = 8f;
-    private static float iMaxValue = 20.0f;
+    private static float iMaxValue = 100.0f;
     private static int iMaxMaxValue = 200;
     private static float dMaxValue = 0.25f;
 
@@ -67,6 +67,7 @@ public class PID_TuningActivity extends AppCompatActivity {
     EditText decimalStepEditText, integerStepEditText;
     Switch autoSendingSwitch;
     ProgressBar connectingProgressBar;
+    Button reconnectButton;
 
 
     // bluetooth variables
@@ -206,9 +207,13 @@ public class PID_TuningActivity extends AppCompatActivity {
         integerStepEditText = findViewById(R.id.integerStepEditText);
 
         autoSendingSwitch = findViewById(R.id.autoSendingSwitch);
-
-
         connectingProgressBar = (ProgressBar) findViewById(R.id.connectingProgressBar);
+        reconnectButton = findViewById(R.id.reconnectButton);
+
+
+
+
+
 
         // fill spinner with values
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(PID_TuningActivity.this, R.array.pid_controllers_list, android.R.layout.simple_spinner_item);
@@ -232,6 +237,12 @@ public class PID_TuningActivity extends AppCompatActivity {
 
         decimalStepEditText.setText(Float.toString(decimalStepValue));
         integerStepEditText.setText(Integer.toString(integerStepValue));
+
+        // check state of the autoSending switch
+        if (autoSendingSwitch.isChecked())
+            pilcom.enableAutoSending();
+        else
+            pilcom.disableAutoSaving();
     }
 
 
@@ -632,6 +643,21 @@ public class PID_TuningActivity extends AppCompatActivity {
 
 
 
+        reconnectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // reset communication variables
+                bluetoothAdapter = null;
+                bluetoothSocket = null;
+                isBtConnected = false;
+
+                new ConnectBT().execute();
+            }
+        });
+
+
+
+
 
     }
 
@@ -835,6 +861,7 @@ public class PID_TuningActivity extends AppCompatActivity {
             super.onPreExecute();
 
             connectingProgressBar.setVisibility(View.VISIBLE);
+            reconnectButton.setEnabled(false);
         }
 
 
@@ -858,6 +885,7 @@ public class PID_TuningActivity extends AppCompatActivity {
             }
 
             connectingProgressBar.setVisibility(View.INVISIBLE);
+            reconnectButton.setEnabled(true);
         }
 
 
