@@ -873,7 +873,9 @@ public class PID_TuningActivity extends AppCompatActivity {
             if (!ConnectSuccess)
             {
                 Toast.makeText(PID_TuningActivity.this, "Connection Failed.", Toast.LENGTH_SHORT).show();
-                finish();
+
+                // Do not close this activity (There is reconnect button)
+                //finish();
             }
             else
             {
